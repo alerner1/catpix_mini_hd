@@ -93,7 +93,7 @@ module Catpix
 
   # Returns the normalised RGB of a ImageMagick's pixel
   def self.get_normal_rgb(pixel)
-    [pixel.red, pixel.green, pixel.blue].map { |v| 255*(v/65535.0) }
+    pixel.map { |v| 255*(v/65535.0) }
   end
 
   # Determine the margins based on the centering options
@@ -127,8 +127,12 @@ module Catpix
     margins
   end
 
+  #############################################################################
+  # "DRAWING" METHODS
+  #############################################################################
+
   def self.prep_vert_margin(size, colour)
-    tw, th = get_screen_size
+    tw = get_screen_size
 
     buffer = ""
     if high_res?
@@ -157,49 +161,48 @@ module Catpix
     buffer.bg colour
   end
 
+  ##
   # Print the image in low resolution
   def self.do_print_image_lr(img, margins, options)
+    pixels = img.get_pixels
+    rows = img[:height]
+    cols = pixels[0].length
+
     print prep_vert_margin margins[:top], margins[:colour]
 
-    0.upto(img.rows - 1) do |row|
+    0.upto(rows - 1) do |row|
       buffer = prep_horiz_margin margins[:left], margins[:colour]
-      0.upto(img.columns - 1) do |col|
-        pixel = img.pixel_color col, row
-
-        buffer += if pixel.opacity == MAX_OPACITY
-          prep_lr_pixel options[:bg]
-        else
-          prep_lr_pixel get_normal_rgb pixel
-        end
+      0.upto(cols - 1) do |col|
+        pixel = pixels[row][col]
+        prep_lr_pixel get_normal_rgb pixel
       end
       buffer += prep_horiz_margin margins[:right], margins[:colour]
       puts buffer
     end
 
     print prep_vert_margin margins[:bottom], margins[:colour]
+
   end
 
+  ##
   # Print the image in high resolution (using unicode's upper half block)
   def self.do_print_image_hr(img, margins, options)
+    pixels = img.get_pixels
+    rows = img[:height]
+    cols = pixels[0].length
+
+
     print prep_vert_margin margins[:top], margins[:colour]
 
-    0.step(img.rows - 1, 2) do |row|
+    0.step(rows, 2) do |row|
       # line buffering makes it about 20% faster
       buffer = prep_horiz_margin margins[:left], margins[:colour]
-      0.upto(img.columns - 1) do |col|
-        top_pixel = img.pixel_color col, row
-        colour_top = if top_pixel.opacity < MAX_OPACITY
-          get_normal_rgb top_pixel
-        else
-          options[:bg]
-        end
+      0.upto(cols - 1) do |col|
+        top_pixel = pixels[row][col]
+        colour_top = get_normal_rgb top_pixel
 
-        bottom_pixel = img.pixel_color col, row + 1
-        colour_bottom = if bottom_pixel.opacity < MAX_OPACITY
-          get_normal_rgb bottom_pixel
-        else
-          options[:bg]
-        end
+        bottom_pixel = pixels[row+1][col]
+        colour_bottom = get_normal_rgb bottom_pixel
 
         buffer += prep_hr_pixel colour_top, colour_bottom
       end
@@ -208,5 +211,6 @@ module Catpix
     end
 
     print prep_vert_margin margins[:bottom], margins[:colour]
+
   end
 end
