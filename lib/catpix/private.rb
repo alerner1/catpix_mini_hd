@@ -1,7 +1,7 @@
 # Copyright (c) 2015 Radek Pazdera <me@radek.io>
 # Distributed under the MIT License (see LICENSE.txt)
 
-require "rmagick"
+require "mini_magick"
 require "tco"
 require "terminfo"
 
@@ -73,7 +73,7 @@ module Catpix
   end
 
   def self.load_image(path)
-    Magick::Image::read(path).first
+    MiniMagick::Image.open(path)
   end
 
   # Scale the image down based on the limits while keeping the aspect ratio
