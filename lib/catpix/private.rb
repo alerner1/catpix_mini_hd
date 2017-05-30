@@ -192,7 +192,7 @@ module Catpix
 
     print prep_vert_margin margins[:top], margins[:colour]
 
-    0.step(rows, 2) do |row|
+    0.step(rows - 1, 2) do |row|
       # line buffering makes it about 20% faster
       buffer = prep_horiz_margin margins[:left], margins[:colour]
       0.upto(cols - 1) do |col|

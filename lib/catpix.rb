@@ -48,6 +48,7 @@ module Catpix
   #                                      automatically based on your terminal's
   #                                      support of unicode.
   def self.print_image(path, options={})
+
     options = default_options.merge! options
 
     if options[:resolution] == 'auto'
