@@ -4,6 +4,7 @@
 require "mini_magick"
 require "tco"
 require "terminfo"
+require "pry"
 
 module Catpix
   private
@@ -91,11 +92,6 @@ module Catpix
     end
   end
 
-  # Returns the normalised RGB of a ImageMagick's pixel
-  def self.get_normal_rgb(pixel)
-    pixel.map { |v| 255*(v/65535.0) }
-  end
-
   # Determine the margins based on the centering options
   def self.get_margins(img, center_x, center_y)
     margins = {}
@@ -174,10 +170,12 @@ module Catpix
       buffer = prep_horiz_margin margins[:left], margins[:colour]
       0.upto(cols - 1) do |col|
         pixel = pixels[row][col]
-        prep_lr_pixel get_normal_rgb pixel
+        buffer += prep_lr_pixel pixel
       end
       buffer += prep_horiz_margin margins[:right], margins[:colour]
+
       puts buffer
+
     end
 
     print prep_vert_margin margins[:bottom], margins[:colour]
@@ -199,10 +197,10 @@ module Catpix
       buffer = prep_horiz_margin margins[:left], margins[:colour]
       0.upto(cols - 1) do |col|
         top_pixel = pixels[row][col]
-        colour_top = get_normal_rgb top_pixel
+        colour_top = top_pixel
 
         bottom_pixel = pixels[row+1][col]
-        colour_bottom = get_normal_rgb bottom_pixel
+        colour_bottom = bottom_pixel
 
         buffer += prep_hr_pixel colour_top, colour_bottom
       end
