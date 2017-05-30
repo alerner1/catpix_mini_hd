@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'catpix/version'
+require 'catpix_mini/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "catpix_minimagick_hd"
-  spec.version       = Catpix::VERSION
+  spec.name          = "catpix_mini"
+  spec.version       = CatpixMini::VERSION
   spec.authors       = ["Huy Dinh"]
   spec.email         = ["phradion@gmail.com"]
   spec.summary       = %q{Cat images into the terminal. A port to work with MiniMagick}
@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
                           the extended 256 colour palette for terminals.
                           This gem is ported from original catpix gem to be
                           compatible with MiniMagick instead of RMagick}
-  spec.homepage      = "https://github.com/phradion/catpix_minimagick_hd"
+  spec.homepage      = "https://github.com/phradion/catpix_mini_HD"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -32,5 +32,4 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake", "~> 10.4"
-  spec.add_development_dependency "pry"
 end

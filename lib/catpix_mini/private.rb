@@ -1,12 +1,13 @@
 # Copyright (c) 2015 Radek Pazdera <me@radek.io>
 # Distributed under the MIT License (see LICENSE.txt)
+# Ported to use mini_magick (c) 2017 Huy Dinh <phradion@gmail.com>
 
 require "mini_magick"
 require "tco"
 require "terminfo"
 require "pry"
 
-module Catpix
+module CatpixMini
   private
   MAX_OPACITY = 65535
 
@@ -173,9 +174,7 @@ module Catpix
         buffer += prep_lr_pixel pixel
       end
       buffer += prep_horiz_margin margins[:right], margins[:colour]
-
       puts buffer
-
     end
 
     print prep_vert_margin margins[:bottom], margins[:colour]

@@ -1,8 +1,9 @@
 # Copyright (c) 2015 Radek Pazdera <me@radek.io>
 # Distributed under the MIT License (see LICENSE.txt)
+# Ported to use mini_magick (c) 2017 Huy Dinh <phradion@gmail.com>
 
-require "catpix/version"
-require "catpix/private"
+require "catpix_mini/version"
+require "catpix_mini/private"
 
 # Provides a function to print images in the terminal. A range of different
 # formats is supported (check out what ImageMagick supports). Under the hood,
@@ -14,7 +15,7 @@ require "catpix/private"
 #
 # Some other minor features like centering and handling background colours
 # are supplied directly by this module.
-module Catpix
+module CatpixMini
   # Print an image to the terminal.
   #
   # All formats supported by ImageMagick are supported. The image's colours
