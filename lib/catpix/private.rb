@@ -79,26 +79,15 @@ module Catpix
   # Scale the image down based on the limits while keeping the aspect ratio
   def self.resize!(img, limit_x=0, limit_y=0)
     tw, th = get_screen_size
-    iw = img.columns
-    ih = img.rows
+    iw = img[:width]
+    ih = img[:height]
 
-    width = if limit_x > 0
-      (tw * limit_x).to_i
-    else
-      iw
-    end
-
-    height = if limit_y > 0
-      (th * limit_y).to_i
-    else
-      ih
-    end
+    width = limit_x > 0 ? (tw * limit_x).to_i : iw
+    height = limit_y > 0 ? (th * limit_y).to_i : ih
 
     # Resize the image if it's bigger than the limited viewport
     if iw > width or ih > height
-      img.change_geometry "#{width}x#{height}" do |cols, rows, img_handle|
-        img_handle.resize! (cols).to_i, (rows).to_i
-      end
+      img.resize "#{width}x#{height}"
     end
   end
 
