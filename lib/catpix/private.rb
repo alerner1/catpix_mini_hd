@@ -101,7 +101,7 @@ module Catpix
     margins = {}
     tw, th = get_screen_size
 
-    x_space = tw - img.columns
+    x_space = tw - img[:width]
     if center_x
       margins[:left] = x_space / 2
       margins[:right] = x_space / 2 + x_space % 2
@@ -110,7 +110,7 @@ module Catpix
       margins[:right] = x_space
     end
 
-    y_space = th - img.rows
+    y_space = th - img[:height]
     if center_y
       margins[:top] = y_space / 2
       margins[:bottom] = y_space / 2 + y_space % 2
