@@ -6,8 +6,8 @@ require 'catpix_mini/version'
 Gem::Specification.new do |spec|
   spec.name          = "catpix_mini"
   spec.version       = CatpixMini::VERSION
-  spec.authors       = ["Huy Dinh"]
-  spec.email         = ["phradion@gmail.com"]
+  spec.authors       = ["Radek Pazdera", "Huy Dinh"]
+  spec.email         = ["me@radek.io", "phradion@gmail.com"]
   spec.summary       = %q{Cat images into the terminal. A port to work with MiniMagick}
   spec.description   = %q{Print images (png, jpg, gif and many others) in the
                           command line with ease. Using rmagick and tco in the
