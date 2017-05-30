@@ -5,7 +5,6 @@
 require "mini_magick"
 require "tco"
 require "terminfo"
-require "pry"
 
 module CatpixMini
   private

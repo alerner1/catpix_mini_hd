@@ -4,7 +4,7 @@
 # Distributed under the MIT License (see LICENSE.txt)
 
 require 'docopt'
-require 'catpix'
+require 'catpix_mini'
 
 doc = <<DOCOPT
 Print images in the terminal.
@@ -28,7 +28,7 @@ Options:
 DOCOPT
 
 begin
-  args = Docopt::docopt doc, :version => Catpix::VERSION
+  args = Docopt::docopt doc, :version => CatpixMini::VERSION
 rescue Docopt::Exit => e
   $stderr.puts e.message
   exit 1
@@ -53,5 +53,5 @@ end
 
 options[:bg] = args['--bg'] if args['--bg']
 
-Catpix::print_image args['<path>'], options
+CatpixMini::print_image args['<path>'], options
 exit 0
