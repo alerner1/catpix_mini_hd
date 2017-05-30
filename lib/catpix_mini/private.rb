@@ -128,7 +128,7 @@ module CatpixMini
   #############################################################################
 
   def self.prep_vert_margin(size, colour)
-    tw = get_screen_size
+    tw, th = get_screen_size
 
     buffer = ""
     if high_res?
