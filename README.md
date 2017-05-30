@@ -10,7 +10,7 @@ I would probably switch over to rmagick for serious projects in the future. I ju
 
 ## Example
 
-    $ catpix pokemon.gif
+    $ catpix_mini pokemon.gif
     
 ![Pokemon](http://radek.io/assets/images/posts/catpix/pokemon.png)
 
