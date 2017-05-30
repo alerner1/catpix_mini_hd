@@ -14,7 +14,8 @@ Gem::Specification.new do |spec|
                           background to read the images and convert them into
                           the extended 256 colour palette for terminals.
                           This gem is ported from original catpix gem to be
-                          compatible with MiniMagick instead of RMagick}
+                          compatible with MiniMagick instead of RMagick. It will
+                          also be faster when rendering large images.}
   spec.homepage      = "https://github.com/phradion/catpix_mini_HD"
   spec.license       = "MIT"
 
